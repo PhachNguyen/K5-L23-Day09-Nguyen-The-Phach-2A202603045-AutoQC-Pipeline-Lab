@@ -35,5 +35,122 @@ from ..common import ERROR, parse_yolo_line  # noqa: F401
 
 
 def fix(ds, issues, cfg):
-    # TODO
-    raise NotImplementedError("autofix chưa làm")
+    drop_codes = {"BAD_FORMAT", "BAD_CLASS_ID", "BOX_ZERO", "DUP_BOX"}
+    remove_codes = {"LEAK_TEST", "CORRUPT_IMAGE", "BAD_SIZE"}
+    errors = [issue for issue in issues if issue.severity == ERROR]
+    fixes = []
+
+    remove_stems = {
+        issue.image for issue in errors
+        if issue.code.startswith("DUP_IMAGE_") or issue.code in remove_codes
+    }
+    for stem in sorted(remove_stems):
+        image_path = ds.image_path(stem)
+        label_path = ds.label_path(stem)
+        if image_path is None and not label_path.exists():
+            continue
+        if image_path is not None:
+            image_path.unlink()
+        label_path.unlink(missing_ok=True)
+        fixes.append({
+            "image": stem, "line": None, "action": "remove_image",
+            "before": "ảnh và nhãn trong ds", "after": "đã xóa khỏi ds",
+        })
+
+    if any(issue.code == "BAD_CLASS_NAME" for issue in errors):
+        data = yaml.safe_load(ds.yaml_path.read_text(encoding="utf-8")) if ds.yaml_path.exists() else {}
+        if data is None:
+            data = {}
+        before = str(data.get("names", "(không có names)"))
+        data["names"] = cfg["classes"]
+        ds.yaml_path.write_text(
+            yaml.safe_dump(data, sort_keys=False, allow_unicode=True),
+            encoding="utf-8",
+        )
+        fixes.append({
+            "image": "data.yaml", "line": None, "action": "rename_classes",
+            "before": before, "after": str(cfg["classes"]),
+        })
+
+    missing_stems = dict.fromkeys(
+        issue.image for issue in errors
+        if issue.code == "MISSING_LABEL_FILE" and issue.image not in remove_stems
+    )
+    for stem in missing_stems:
+        fixes.append({
+            "image": stem, "line": None, "action": "needs_label",
+            "before": "(không có file)", "after": "chuyển người gán",
+        })
+
+    line_ops = defaultdict(dict)
+    for issue in errors:
+        if issue.image in remove_stems or issue.line is None:
+            continue
+        if issue.code in drop_codes or issue.code == "BOX_OUT_OF_IMAGE":
+            line_ops[issue.image].setdefault(issue.line, set()).add(issue.code)
+
+    for stem, ops in line_ops.items():
+        label_path = ds.label_path(stem)
+        if not label_path.exists():
+            continue
+        original_lines = label_path.read_text(encoding="utf-8", errors="replace").splitlines(keepends=True)
+        updated_lines = list(original_lines)
+        changed = False
+
+        for line_no in sorted(ops):
+            index = line_no - 1
+            if not 0 <= index < len(original_lines):
+                continue
+            before = original_lines[index].rstrip("\r\n")
+            if ops[line_no] & drop_codes:
+                updated_lines[index] = None
+                fixes.append({
+                    "image": stem, "line": line_no, "action": "drop_line",
+                    "before": before, "after": "",
+                })
+                changed = True
+                continue
+
+            if "BOX_OUT_OF_IMAGE" not in ops[line_no]:
+                continue
+            try:
+                cls, cx, cy, w, h = parse_yolo_line(before)
+            except (ValueError, OverflowError):
+                continue
+
+            left, top = max(0.0, cx - w / 2), max(0.0, cy - h / 2)
+            right, bottom = min(1.0, cx + w / 2), min(1.0, cy + h / 2)
+            if right <= left or bottom <= top:
+                updated_lines[index] = None
+                fixes.append({
+                    "image": stem, "line": line_no, "action": "drop_line",
+                    "before": before, "after": "",
+                })
+                changed = True
+                continue
+
+            clipped = (
+                cls,
+                (left + right) / 2,
+                (top + bottom) / 2,
+                right - left,
+                bottom - top,
+            )
+            after = f"{clipped[0]} " + " ".join(f"{value:.6f}" for value in clipped[1:])
+            if after == before:
+                continue
+            newline = "\n" if original_lines[index].endswith(("\n", "\r")) else ""
+            updated_lines[index] = after + newline
+            fixes.append({
+                "image": stem, "line": line_no, "action": "clip_box",
+                "before": before, "after": after,
+            })
+            changed = True
+
+        if changed:
+            label_path.write_text(
+                "".join(line for line in updated_lines if line is not None),
+                encoding="utf-8",
+            )
+
+    return fixes
