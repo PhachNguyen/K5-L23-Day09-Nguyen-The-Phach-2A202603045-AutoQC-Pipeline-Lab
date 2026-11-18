@@ -1,12 +1,12 @@
 # Danh sách lỗi — TRƯỚC khi sửa (v1)
-ảnh đã quét: 205
+ảnh đã quét: 202
 
 class_names -> 2 dòng
-duplicates -> 14 dòng
+duplicates -> 17 dòng
 images -> 5 dòng
 label_format -> 37 dòng
 missing_labels -> 18 dòng
-second_opinion -> 248 dòng
+second_opinion -> 128 dòng
 stats -> 4 dòng
 
 [ERROR] BAD_CLASS_ID         img_0020.txt:3  ID lớp 93 nằm ngoài phạm vi hợp lệ
@@ -54,7 +54,10 @@ stats -> 4 dòng
 [ERROR] DUP_IMAGE_EXACT      img_0222  trùng từng byte với img_0151
 [ERROR] DUP_IMAGE_NEAR       img_0076  trùng gần đúng với img_0042 (phash 0)
 [ERROR] DUP_IMAGE_NEAR       img_0143  trùng gần đúng với img_0037 (phash 0)
+[ERROR] DUP_IMAGE_NEAR       img_0186  trùng gần đúng với img_0061 (phash 10)
+[ERROR] DUP_IMAGE_NEAR       img_0223  trùng gần đúng với img_0077 (phash 6)
 [ERROR] LEAK_TEST            img_0049  trùng ảnh kho test/val: test/test_033.jpg
+[ERROR] LEAK_TEST            img_0101  trùng ảnh kho test/val: test/test_039.jpg
 [ERROR] LEAK_TEST            img_0167  trùng ảnh kho test/val: test/test_044.jpg
 [ERROR] LEAK_TEST            img_0174  trùng ảnh kho test/val: test/test_085.jpg
 [ERROR] LEAK_TEST            img_0221  trùng ảnh kho test/val: test/test_009.jpg
@@ -119,31 +122,18 @@ stats -> 4 dòng
 [WARN ] POSSIBLE_FALSE_POS   img_0204.txt:1  Box nhãn không khớp với dự đoán nào của model.
 [WARN ] POSSIBLE_FALSE_POS   img_0206.txt:1  Box nhãn không khớp với dự đoán nào của model.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0015  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0015  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0018  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0023  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0030  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0036  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0038  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0045  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0045  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0046  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0051  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0054  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0058  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0062  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0062  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0063  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0064  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0068  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0069  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0075  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0077  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0081  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0082  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0090  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0091  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0094  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0094  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0096  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0119  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
@@ -155,166 +145,63 @@ stats -> 4 dòng
 [WARN ] POSSIBLE_LOOSE_BOX   img_0171  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0171  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0175  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0175  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0179  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0188  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0200  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0210  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0217  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
 [WARN ] POSSIBLE_LOOSE_BOX   img_0217  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_LOOSE_BOX   img_0223  Box nhãn cùng lớp có thể bị lỏng hoặc lệch.
-[WARN ] POSSIBLE_MISSING     img_0001  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0001  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0004  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0004  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0005  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0012  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0014  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0019  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0020  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0020  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0020  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0021  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0022  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0024  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0027  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0028  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0030  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0030  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0032  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0032  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0032  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0032  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0037  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0045  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0047  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0050  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0051  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0057  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0058  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0058  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0058  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0058  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0058  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0064  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0065  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0066  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0066  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0067  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0067  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0067  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0067  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0068  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0073  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0078  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0084  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0084  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0084  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0086  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0087  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0091  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0092  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0093  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0094  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0095  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0096  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0099  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0099  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0099  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0100  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0100  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0103  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0104  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0106  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0108  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0108  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0114  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0114  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0116  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0116  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0117  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0119  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0119  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0119  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0121  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0124  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0124  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0125  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0125  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0127  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0127  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0127  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0127  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0127  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0127  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0131  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0131  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0133  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0133  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0134  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0134  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0137  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0138  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0142  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0144  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0145  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0147  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0151  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0151  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0151  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0151  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0157  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0159  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0160  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0160  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0160  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0160  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0160  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0160  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0160  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0160  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0160  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0160  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0160  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0163  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0164  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0165  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0165  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0178  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0182  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0184  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0185  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0187  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0187  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0188  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0191  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0194  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0195  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0195  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0195  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0195  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0195  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0199  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0199  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0200  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0204  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0205  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0210  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0210  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0210  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0211  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0211  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0215  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0215  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0218  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_MISSING     img_0220  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0220  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0220  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0220  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0220  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0224  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0224  Model thấy vật thể nhưng không có box nhãn khớp.
-[WARN ] POSSIBLE_MISSING     img_0224  Model thấy vật thể nhưng không có box nhãn khớp.
 [WARN ] POSSIBLE_WRONG_CLASS img_0019  Model và nhãn có thể gán khác lớp cho cùng vật thể.
 [WARN ] POSSIBLE_WRONG_CLASS img_0020  Model và nhãn có thể gán khác lớp cho cùng vật thể.
 [WARN ] POSSIBLE_WRONG_CLASS img_0021  Model và nhãn có thể gán khác lớp cho cùng vật thể.
@@ -324,13 +211,9 @@ stats -> 4 dòng
 [WARN ] POSSIBLE_WRONG_CLASS img_0071  Model và nhãn có thể gán khác lớp cho cùng vật thể.
 [WARN ] POSSIBLE_WRONG_CLASS img_0075  Model và nhãn có thể gán khác lớp cho cùng vật thể.
 [WARN ] POSSIBLE_WRONG_CLASS img_0083  Model và nhãn có thể gán khác lớp cho cùng vật thể.
-[WARN ] POSSIBLE_WRONG_CLASS img_0092  Model và nhãn có thể gán khác lớp cho cùng vật thể.
-[WARN ] POSSIBLE_WRONG_CLASS img_0101  Model và nhãn có thể gán khác lớp cho cùng vật thể.
 [WARN ] POSSIBLE_WRONG_CLASS img_0112  Model và nhãn có thể gán khác lớp cho cùng vật thể.
 [WARN ] POSSIBLE_WRONG_CLASS img_0124  Model và nhãn có thể gán khác lớp cho cùng vật thể.
-[WARN ] POSSIBLE_WRONG_CLASS img_0124  Model và nhãn có thể gán khác lớp cho cùng vật thể.
 [WARN ] POSSIBLE_WRONG_CLASS img_0160  Model và nhãn có thể gán khác lớp cho cùng vật thể.
-[WARN ] POSSIBLE_WRONG_CLASS img_0180  Model và nhãn có thể gán khác lớp cho cùng vật thể.
 [WARN ] POSSIBLE_WRONG_CLASS img_0183  Model và nhãn có thể gán khác lớp cho cùng vật thể.
 [WARN ] POSSIBLE_WRONG_CLASS img_0185  Model và nhãn có thể gán khác lớp cho cùng vật thể.
 [WARN ] POSSIBLE_WRONG_CLASS img_0191  Model và nhãn có thể gán khác lớp cho cùng vật thể.
@@ -348,14 +231,14 @@ error BOX_ZERO               4
 error CORRUPT_IMAGE          2
 error DUP_BOX                7
 error DUP_IMAGE_EXACT        8
-error DUP_IMAGE_NEAR         2
-error LEAK_TEST              4
+error DUP_IMAGE_NEAR         4
+error LEAK_TEST              5
 error MISSING_LABEL_FILE     6
 warn  BOX_HUGE               3
 warn  BOX_TINY               6
 warn  CLASS_RARE             4
 warn  EMPTY_LABEL            12
 warn  POSSIBLE_FALSE_POS     29
-warn  POSSIBLE_LOOSE_BOX     45
-warn  POSSIBLE_MISSING       152
-warn  POSSIBLE_WRONG_CLASS   22
+warn  POSSIBLE_LOOSE_BOX     28
+warn  POSSIBLE_MISSING       53
+warn  POSSIBLE_WRONG_CLASS   18
