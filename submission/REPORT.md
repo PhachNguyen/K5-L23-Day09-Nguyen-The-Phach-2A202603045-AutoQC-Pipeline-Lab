@@ -34,7 +34,14 @@ Pipeline kết luận **Hold**. Ở lần chạy cuối, đã quét 224 ảnh ra
 
 ## 5. Train: raw vs clean (tùy chọn, chấm riêng)
 
-Chưa chạy phần train Colab (tùy chọn, chấm riêng); chưa có kết quả raw/clean để so sánh.
+| Biến thể | # ảnh train | Số seed | mAP50 (TB ± độ lệch) | mAP50-95 (TB ± độ lệch) | Precision (TB ± độ lệch) | Recall (TB ± độ lệch) |
+|---|---:|---:|---:|---:|---:|---:|
+| raw | 224 | 2 | 0.726 ± 0.000 | 0.512 ± 0.004 | 0.764 ± 0.061 | 0.649 ± 0.028 |
+| clean | 202 | 2 | 0.701 ± 0.025 | 0.487 ± 0.008 | 0.759 ± 0.003 | 0.625 ± 0.019 |
+
+`mAP50` clean − raw = **−0.0252** (0.7006 − 0.7258). Độ lệch mAP50 giữa hai seed của clean là 0.0246, gần bằng mức chênh trung bình; với chỉ 2 seed, chưa thể kết luận clean làm giảm chất lượng. mAP50-95 và recall cũng thấp hơn ở clean, còn precision gần như giữ nguyên.
+
+Hai giả thuyết cần kiểm tra: (1) clean có ít hơn 22 ảnh; việc loại ảnh trùng/rò rỉ/hỏng có thể đồng thời làm giảm độ đa dạng, nhất là ví dụ của lớp truck — kiểm tra số box theo lớp và ảnh truck bị loại trong báo cáo intake; (2) nhãn clean vẫn còn cảnh báo sau duyệt, có thể ảnh hưởng chất lượng — mở kiểm tra các ảnh truck có cảnh báo trong `07_error_list_v3.csv`. Bộ test nhỏ và chỉ 2 seed cũng khiến kết quả dao động; cần thêm seed hoặc tập đánh giá độc lập trước khi kết luận chắc chắn.
 
 ## 6. Quyết định và ghi chú AI
 
